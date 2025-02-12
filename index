@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rostos Personalizados para Dress to Impress</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Personalize seu rosto para Dress to Impress</h1>
+        <p>Carregue uma foto e obtenha sugestões de rosto baseado nela!</p>
+        
+        <input type="file" id="fileInput" accept="image/*">
+        <button id="uploadBtn">Carregar Foto</button>
+        
+        <div id="result">
+            <h2>Características sugeridas:</h2>
+            <div id="suggestions">
+                <p>Olho: <span id="eye-suggestion">Aguarde...</span></p>
+                <p>Boca: <span id="mouth-suggestion">Aguarde...</span></p>
+                <p>Nariz: <span id="nose-suggestion">Aguarde...</span></p>
+                <p>Sobrancelha: <span id="brow-suggestion">Aguarde...</span></p>
+                <p>Contorno: <span id="contour-suggestion">Aguarde...</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
