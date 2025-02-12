@@ -1,0 +1,39 @@
+from flask import Flask, request, jsonify
+from PIL import Image
+import io
+import some_face_recognition_library  # Aqui você usaria uma biblioteca como OpenCV ou DeepFace
+
+app = Flask(__name__)
+
+@app.route('/process_image', methods=['POST'])
+def process_image():
+    if 'file' not in request.files:
+        return jsonify({"error": "Nenhum arquivo enviado"}), 400
+    
+    file = request.files['file']
+    
+    try:
+        img = Image.open(file.stream)
+        # Aqui você faria o processamento da imagem e extração das características faciais
+        # Como exemplo, vamos retornar características predefinidas.
+        
+        face_features = extract_face_features(img)
+
+        return jsonify(face_features)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+def extract_face_features(img):
+    # Este é um exemplo simples de como poderia extrair as características faciais.
+    # Em um sistema real, você usaria uma biblioteca como OpenCV ou DeepFace para detectar o rosto e extrair características.
+    
+    return {
+        "eye": "Olho Grande",
+        "mouth": "Boca Sorrindo",
+        "nose": "Nariz Médio",
+        "brow": "Sobrancelha Alta",
+        "contour": "Contorno Suave"
+    }
+
+if __name__ == '__main__':
+    app.run(debug=True)
