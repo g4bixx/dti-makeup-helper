@@ -1,0 +1,38 @@
+from flask import Flask, request, jsonify
+from PIL import Image
+import io
+
+app = Flask(__name__)
+
+@app.route('/process_image', methods=['POST'])
+def process_image():
+    if 'file' not in request.files:
+        return jsonify({"error": "Nenhum arquivo enviado"}), 400
+    
+    file = request.files['file']
+    
+    try:
+        # Abrindo a imagem
+        img = Image.open(file.stream)
+        
+        # Aqui você deve fazer o processamento real da imagem (ex: com OpenCV ou DeepFace)
+        # Para agora, vamos apenas simular a análise facial
+        face_features = extract_face_features(img)
+        
+        return jsonify(face_features)
+    except Exception as e:
+        print(f"Erro ao processar a imagem: {e}")  # Log para diagnosticar
+        return jsonify({"error": "Erro ao processar a imagem"}), 500
+
+def extract_face_features(img):
+    # Simulando a extração de características faciais. Você deve integrar aqui uma lib de reconhecimento facial.
+    return {
+        "eye": "Olho Grande",
+        "mouth": "Boca Sorrindo",
+        "nose": "Nariz Médio",
+        "brow": "Sobrancelha Alta",
+        "contour": "Contorno Suave"
+    }
+
+if __name__ == '__main__':
+    app.run(debug=True)
