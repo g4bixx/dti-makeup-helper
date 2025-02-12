@@ -1,0 +1,27 @@
+document.getElementById('uploadBtn').addEventListener('click', function() {
+    const fileInput = document.getElementById('fileInput');
+    const formData = new FormData();
+
+    if (fileInput.files.length === 0) {
+        alert("Por favor, selecione uma imagem.");
+        return;
+    }
+
+    formData.append("file", fileInput.files[0]);
+
+    fetch('/process_image', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('eye-suggestion').textContent = data.eye;
+        document.getElementById('mouth-suggestion').textContent = data.mouth;
+        document.getElementById('nose-suggestion').textContent = data.nose;
+        document.getElementById('brow-suggestion').textContent = data.brow;
+        document.getElementById('contour-suggestion').textContent = data.contour;
+    })
+    .catch(error => {
+        console.error("Erro ao processar a imagem:", error);
+    });
+});
